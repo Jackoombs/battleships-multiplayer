@@ -5,7 +5,7 @@ import Game from "./components/Game";
 import Result from "./components/Result";
 import { io } from "socket.io-client";
 
-const socket = io("https://jc-battleships.herokuapp.com/");
+const socket = io("http://jc-battleships.herokuapp.com/");
 
 function App() {
   const [playerTurn, setPlayerTurn] = useState();
