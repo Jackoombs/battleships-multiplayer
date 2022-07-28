@@ -69,6 +69,8 @@ function PlanningPhaseTile(props) {
       onWheel={handleWheel}
       onClick={handleClick}
       onTouchStart={handleHover}
+      x={props.x}
+      y={props.y}
     >
     </div>
   );
