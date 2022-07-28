@@ -17,7 +17,6 @@ function Game(props) {
   };
 
   const [roundStatus, setRoundStatus] = useState("deciding")
-  const [isReady, setIsReady] = useState(false);
   const [selectedTiles, setSelectedTiles] = useState(twoDimensionalArray());
   const [ships, setShips] = useState([
     ship("carrier", 5),
@@ -57,11 +56,6 @@ function Game(props) {
       setActiveShip(shipsNotPlaced[0]);
     }
   };
-
-  useEffect(() => {
-    console.log(selectedTiles)
-  },[selectedTiles])
-  
 
   return (
     <section className="game">
@@ -104,8 +98,6 @@ function Game(props) {
       )}
 
       <GameStatus
-        isReady={isReady}
-        setIsReady={setIsReady}
         activeShip={activeShip}
         gamePhase={props.gamePhase}
         setGamePhase={props.setGamePhase}

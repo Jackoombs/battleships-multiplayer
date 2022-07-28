@@ -5,7 +5,7 @@ import Game from "./components/Game";
 import Result from "./components/Result";
 import { io } from "socket.io-client";
 
-const socket = io("https://jc-battleships.herokuapp.com/");
+const socket = io("http://localhost:8080/");
 
 function App() {
   const [playerTurn, setPlayerTurn] = useState();
@@ -33,11 +33,15 @@ function App() {
     });
   
     socket.on("receive-winner", () => {
-      setGamePhase("result")
-      console.log(finalPlayerTurn)
       if (finalPlayerTurn.current) setIsWinner(true)
+      setGamePhase("result")
     })
-  },[])
+
+    socket.on("restart-game", () => {
+      setGamePhase("planning")
+      setIsWinner(false)
+    })
+  },[playerTurn])
 
   return (
     <div className="App">
@@ -63,6 +67,8 @@ function App() {
       {gamePhase === "result" &&
         <Result 
           isWinner={isWinner}
+          socket={socket}
+          room={room}
         />}
     </div>
   );

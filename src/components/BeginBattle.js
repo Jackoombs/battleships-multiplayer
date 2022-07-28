@@ -1,42 +1,42 @@
 import React, { useEffect, useState } from "react";
-import PlanningWait from "./PlanningWait";
+import WaitModal from "./WaitModal";
 
 function BeginBattle(props) {
+
+  const [isReady, setIsReady] = useState(false);
   
   useEffect(() => {
     props.socket.on("check-ready", emitBattle);
-  });
+    return () => {
+      props.socket.removeAllListeners("check-ready")
+    }
+    
+  },[isReady]);
 
   const handleClick = () => {
-    props.setIsReady(true);
+    setIsReady(true);
     props.socket.emit("client-ready", props.room);
   };
 
   const emitBattle = () => {
-    if (props.isReady) {
+    if (isReady) {
       props.socket.emit("start-battle", props.room);
     }
   };
 
-  const renderComponent = () => {
-    if (!props.isReady) {
-      return (
-        <button className="lobby-btn" id="begin-battle" onClick={handleClick}>
-          BEGIN BATTLE
-        </button>
-      );
-    } else {
-      return (
-        <PlanningWait
-          setIsReady={props.setIsReady}
+  return (
+    <>
+      <button className="lobby-btn" id="begin-battle" onClick={handleClick}>
+        BEGIN BATTLE
+      </button>
+      {isReady &&          
+        <WaitModal
+          setState={setIsReady}
           socket={props.socket}
-          emitBattle={emitBattle}
-        />
-      );
-    }
-  };
-
-  return <>{renderComponent()}</>;
+          listenerEvent={"check-ready"}
+        />}
+    </> 
+  ) 
 }
 
 export default BeginBattle;

@@ -1,15 +1,15 @@
 import { Puff } from "react-loading-icons";
 
-function PlanningWait(props) {
+function WaitModal(props) {
   const handleClick = () => {
-    props.setIsReady(false);
-    props.socket.removeAllListeners("check-ready");
+    props.setState(false);
+    props.socket.removeAllListeners(props.listenerEvent);
   };
 
   return (
     <div className="modal-outer">
       <div className="modal-inner">
-        <h2>Waiting for opponent to finish planning.</h2>
+        <h2>Waiting for opponent</h2>
         <Puff height="10rem" width="10rem" />
         <button className="lobby-btn" onClick={handleClick}>
           Back
@@ -19,4 +19,4 @@ function PlanningWait(props) {
   );
 }
 
-export default PlanningWait;
+export default WaitModal;

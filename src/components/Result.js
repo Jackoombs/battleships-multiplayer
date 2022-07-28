@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import ReactCanvasConfetti from "react-canvas-confetti";
+import WaitModal from "./WaitModal"
 
 function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
@@ -63,11 +64,42 @@ function Result(props) {
     )
   }
 
+  const [playAgain, setPlayAgain] = useState(false)
+  const handleClick = () => {
+    setPlayAgain(true)
+    props.socket.emit("send-play-again", props.room)
+  }
+
+  useEffect(() => {
+    props.socket.on("check-play-again", emitRestart)
+
+    return () => {
+      props.socket.removeAllListeners("check-play-again")
+    }
+  },[playAgain])
+
+  const emitRestart = () => {
+    if (playAgain) {
+      props.socket.emit("send-restart-game", props.room)
+    }
+  }
+
   return (
     <main>
       <h2>{ResultMessage()}</h2>
       {props.isWinner && <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />} 
-      <button>PlayAgain?</button>
+
+      <button 
+        className="lobby-btn"
+        onClick={handleClick}>
+        Play Again?
+      </button>
+      {playAgain && 
+        <WaitModal 
+          setState={setPlayAgain}
+          listenerEvent="check-play-again"
+          socket={props.socket}
+        />}
     </main>
   )
 }

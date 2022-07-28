@@ -40,6 +40,11 @@ function BattleGameboard(props) {
       }
       setDisableClick(true)
     })
+
+    return () => {
+      props.socket.removeAllListeners("receive-turn-result")
+      props.socket.removeAllListeners("receive-fire")
+    }
   },[])
 
   const [opponentTiles, setOpponentTiles] = useState(
@@ -59,7 +64,6 @@ function BattleGameboard(props) {
   const checkSunk = (tile) => {
     const hitShip = props.selectedTiles[tile.x][tile.y]
     const shipTilesRemaining = [].concat(...props.selectedTiles).filter(e => e === hitShip)
-    console.log(shipTilesRemaining.length)
     return shipTilesRemaining.length === 1 ? hitShip : false
   }
 
@@ -70,7 +74,6 @@ function BattleGameboard(props) {
   }
 
   const updateSunk = (isSunk) => {
-    console.log(isSunk)
     if (isSunk && playerTurn.current) {
       const newShips = props.opponentShips.map(ship => {
         if (ship.name === isSunk) {
@@ -93,9 +96,7 @@ function BattleGameboard(props) {
 
   const checkWin = () => {
     const remainingShips = props.opponentShips.filter(ship => !ship.sunk )
-    console.log("winner")
     if (remainingShips.length === 1) {
-      
       props.socket.emit("send-winner", props.room)
     }
   }
