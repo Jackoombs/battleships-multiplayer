@@ -56,7 +56,7 @@ function PlanningGameboard(props) {
     const yCoord = e.targetTouches[0].clientY;
     const elements = document.elementsFromPoint(xCoord, yCoord);
     if (elements[0].classList.contains("tile")) {
-      setCurrentTile({ x: +elements[0].x, y: +elements[0].y });
+      setCurrentTile({ x: +elements[0].getAttribute("x"), y: +elements[0].getAttribute("y") });
     }
   };
 
