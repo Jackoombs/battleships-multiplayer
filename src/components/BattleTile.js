@@ -1,3 +1,5 @@
+import { motion } from "framer-motion"
+
 function BattleTile(props) {
 
   const handleHover = () => {
@@ -32,12 +34,16 @@ function BattleTile(props) {
     }
   };
 
+  
+
   return (
-    <div
+    <motion.div
       className={`tile ${tileStyle()}`}
       onMouseEnter={handleHover}
       onClick={handleClick}
-    ></div>
+      animate={props.animatedTile.x === props.x && props.animatedTile.y === props.y ? {borderColor: "#f73b42"} : ''}
+      transition={{ duration: 0.45, repeat: 5, ease: "backInOut", repeatType: "reverse"}}
+    />
   );
 }
 

@@ -3,6 +3,7 @@ import BattleTile from "./BattleTile";
 
 function BattleGameboard(props) {
 
+  const [animatedTile, setAnimatedTile] = useState({})
   const [disableClick, setDisableClick] = useState(false)
   let playerTurn = useRef(props.playerTurn)
 
@@ -12,7 +13,7 @@ function BattleGameboard(props) {
         props.setPlayerTurn(turn => !turn)
         setDisableClick(false)
         props.setRoundStatus("deciding")
-      },500)
+      },2500)
     }
   },[disableClick])
 
@@ -31,6 +32,7 @@ function BattleGameboard(props) {
     })
 
     props.socket.on("receive-turn-result", (tile, isHit, isSunk) => {
+      setAnimatedTile({x: tile.x, y:tile.y})
       updateHitMiss(tile, isHit)
       updateSunk(isSunk)
       if (isSunk) {
@@ -120,6 +122,7 @@ function BattleGameboard(props) {
               opponentTiles={opponentTiles}
               sendFire={sendFire}
               disableClick={disableClick}
+              animatedTile={animatedTile}
             />
           ))
         )}

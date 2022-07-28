@@ -40,7 +40,7 @@ input {
 }
 
 p {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 
 body {
@@ -182,7 +182,7 @@ li {
 
 #gameboard {
   display: grid;
-  grid-template-columns: repeat(10, auto);
+  grid-template-columns: repeat(10, 1fr);
   text-align: center;
   touch-action: none;
 }
@@ -191,7 +191,8 @@ li {
   width: var(--tile-size);
   height: var(--tile-size);
   background-color: var(--secondary-color-200);
-  outline: 0.25rem var(--primary-color) solid;
+  border: 2px var(--primary-color) solid;
+  outline-color: var(--primary-color);
 
   display: flex;
   justify-content: center;
