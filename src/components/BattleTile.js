@@ -39,8 +39,9 @@ function BattleTile(props) {
   return (
     <motion.div
       className={`tile ${tileStyle()}`}
-      onMouseEnter={handleHover}
+      onMouseOver={handleHover}
       onClick={handleClick}
+      onTouchStart={handleHover}
       animate={props.animatedTile.x === props.x && props.animatedTile.y === props.y ? {borderColor: "#f73b42"} : ''}
       transition={{ duration: 0.45, repeat: 5, ease: "backInOut", repeatType: "reverse"}}
     />
