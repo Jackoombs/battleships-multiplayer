@@ -17,15 +17,32 @@ function PlanningGameboard(props) {
     setValidOnHover(checkValidOnHover());
   }, [tilesOnHover]);
 
-
   useEffect(() => {
     setTilesOnHover(props.twoDimensionalArray());
   },[props.activeShip])
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown )
+  },[])
+
   const handleMouseLeave = () => {
-    console.log(currentTile)
     setTilesOnHover(props.twoDimensionalArray());
   };
+
+  const handleTouchMove = (e) => {
+    const xCoord = e.targetTouches[0].clientX;
+    const yCoord = e.targetTouches[0].clientY;
+    const elements = document.elementsFromPoint(xCoord, yCoord);
+    if (elements[0].classList.contains("tile")) {
+      setCurrentTile({ x: +elements[0].getAttribute("x"), y: +elements[0].getAttribute("y") });
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === " ") {
+      setOrientation((old) => (old === "x" ? "y" : "x"))
+    }
+  }
 
   const getShipTiles = () => {
     const newTilesOnHover = props.twoDimensionalArray();
@@ -57,21 +74,13 @@ function PlanningGameboard(props) {
     return true;
   };
 
-  const handleTouchMove = (e) => {
-    const xCoord = e.targetTouches[0].clientX;
-    const yCoord = e.targetTouches[0].clientY;
-    const elements = document.elementsFromPoint(xCoord, yCoord);
-    if (elements[0].classList.contains("tile")) {
-      setCurrentTile({ x: +elements[0].getAttribute("x"), y: +elements[0].getAttribute("y") });
-    }
-  };
-
   return (
     <main>
       <div
         id="gameboard"
         onMouseOut={handleMouseLeave}
         onTouchMove={handleTouchMove}
+        tabIndex="0"
       >
         {[...Array(10)].map((e, i) =>
           [...Array(10)].map((e2, i2) => (
