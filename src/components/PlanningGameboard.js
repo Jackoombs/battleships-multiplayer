@@ -11,14 +11,20 @@ function PlanningGameboard(props) {
 
   useEffect(() => {
     getShipTiles();
-  }, [currentTile, props.activeShip, orientation]);
+  }, [currentTile, orientation]);
 
   useEffect(() => {
     setValidOnHover(checkValidOnHover());
   }, [tilesOnHover]);
 
+
+  useEffect(() => {
+    setTilesOnHover(props.twoDimensionalArray());
+  },[props.activeShip])
+
   const handleMouseLeave = () => {
-    setCurrentTile();
+    console.log(currentTile)
+    setTilesOnHover(props.twoDimensionalArray());
   };
 
   const getShipTiles = () => {
@@ -64,7 +70,7 @@ function PlanningGameboard(props) {
     <main>
       <div
         id="gameboard"
-        onMouseLeave={handleMouseLeave}
+        onMouseOut={handleMouseLeave}
         onTouchMove={handleTouchMove}
       >
         {[...Array(10)].map((e, i) =>

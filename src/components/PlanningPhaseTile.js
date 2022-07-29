@@ -1,4 +1,5 @@
 function PlanningPhaseTile(props) {
+  
   const handleHover = () => {
     props.setCurrentTile({ x: props.x, y: props.y });
   };
@@ -57,7 +58,8 @@ function PlanningPhaseTile(props) {
     if (props.selectedTiles[props.x][props.y]) {
       return props.selectedTiles[props.x][props.y];
     }
-    if (props.tilesOnHover[props.x][props.y]) {
+    if (props.tilesOnHover[props.x][props.y]
+      && props.activeShip.name !== "dummy") {
       return props.activeShip.name + " hover";
     }
   };
