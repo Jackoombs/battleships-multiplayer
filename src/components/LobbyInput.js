@@ -70,11 +70,11 @@ function LobbyInput(props) {
             ))
           : ""}
         <span>
-          <button className="lobby-btn" type="submit">
-            {props.playerTurn ? "Create" : "Join"}
-          </button>
           <button className="lobby-btn" type="text" onClick={handleBack}>
             Back
+          </button>
+          <button className="lobby-btn" type="submit">
+            {props.playerTurn ? "Create" : "Join"}
           </button>
         </span>
       </form>
