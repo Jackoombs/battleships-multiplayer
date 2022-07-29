@@ -187,6 +187,11 @@ li {
   touch-action: none;
 }
 
+#gameboard:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .tile {
   width: var(--tile-size);
   height: var(--tile-size);
