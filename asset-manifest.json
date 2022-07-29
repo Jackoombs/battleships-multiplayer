@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/battleships-multiplayer/static/css/main.b4a21fa9.css",
-    "main.js": "/battleships-multiplayer/static/js/main.ac1b5a16.js",
+    "main.css": "/battleships-multiplayer/static/css/main.2938fbdc.css",
+    "main.js": "/battleships-multiplayer/static/js/main.3f66e3e5.js",
     "static/js/787.71df535f.chunk.js": "/battleships-multiplayer/static/js/787.71df535f.chunk.js",
     "static/media/torpedo.png": "/battleships-multiplayer/static/media/torpedo.efd24590d9dd9bec3528.png",
     "index.html": "/battleships-multiplayer/index.html",
-    "main.b4a21fa9.css.map": "/battleships-multiplayer/static/css/main.b4a21fa9.css.map",
-    "main.ac1b5a16.js.map": "/battleships-multiplayer/static/js/main.ac1b5a16.js.map",
+    "main.2938fbdc.css.map": "/battleships-multiplayer/static/css/main.2938fbdc.css.map",
+    "main.3f66e3e5.js.map": "/battleships-multiplayer/static/js/main.3f66e3e5.js.map",
     "787.71df535f.chunk.js.map": "/battleships-multiplayer/static/js/787.71df535f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b4a21fa9.css",
-    "static/js/main.ac1b5a16.js"
+    "static/css/main.2938fbdc.css",
+    "static/js/main.3f66e3e5.js"
   ]
 }
